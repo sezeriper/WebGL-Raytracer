@@ -7,7 +7,8 @@
         <script src="./src/Light.js"></script>
         <script src="./src/Shaders.js"></script>
         <script src="./src/FirstPersonCamera.js"></script>
-        <script src="./src/RayTracer.js"></script>    
+        <script src="./src/RayTracer.js"></script>
+        <title id="title"></title>
     </head>
     <body>
 
@@ -29,8 +30,19 @@
 
             tracer.uploadScene(scene)
 
-            let fps = Infinity
-            setInterval(RayTracer.draw, 1000.0/fps, tracer)
+            let time = 0
+            let startTime = Date.now()
+            let frameCount = 0
+
+            let func = function(tracer) {
+                RayTracer.draw(tracer)
+                frameCount += 1
+                time = Date.now() - startTime
+            }
+
+            let fps = 100.0
+            setInterval(func, 1000.0/fps, tracer)
+            setInterval(function() { document.title = 1000.0/(time/frameCount) }, 1000.0)
         </script>
     </body>
 </html>
