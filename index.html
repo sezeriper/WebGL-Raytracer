@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="./src/Vector.js"></script>
+        <script src="./src/Matrix.js"></script>
+        <script src="./src/Material.js"></script>
+        <script src="./src/Sphere.js"></script>
+        <script src="./src/Light.js"></script>
+        <script src="./src/Shaders.js"></script>
+        <script src="./src/FirstPersonCamera.js"></script>
+        <script src="./src/RayTracer.js"></script>    
+    </head>
+    <body>
+
+        <canvas id="glCanvas" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"></canvas>
+
+        <script>            
+            let canvas = document.querySelector("#glCanvas")
+            let tracer = new RayTracer(canvas)
+            let fpCamera = new FirstPersonCamera(tracer)
+
+            fpCamera.cameraMat = null
+            let scene = [
+                new Sphere(new Vector(0.0, 0.0, 20.0), 1.0, new Material(new Vector(1.0, 0.0, 0.0))).get(),
+                new Sphere(new Vector(20.0, 0.0, 0.0), 1.0, new Material(new Vector(0.0, 1.0, 0.0))).get(),
+                new Sphere(new Vector(-20.0, 0.0, 0.0), 1.0, new Material(new Vector(0.0, 0.0, 1.0))).get(),
+                new Sphere(new Vector(0.0, 0.0, -20.0), 1.0, new Material(new Vector(1.0, 0.0, 1.0))).get(),
+                new Light(new Vector(0.0, 20.0, 0.0)).get()
+            ]
+
+            tracer.uploadScene(scene)
+
+            let fps = Infinity
+            setInterval(RayTracer.draw, 1000.0/fps, tracer)
+        </script>
+    </body>
+</html>
