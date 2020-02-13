@@ -1,4 +1,6 @@
 <html>
+    <meta charset="UTF-8">
+    
     <head>
         <script src="./src/Vector.js"></script>
         <script src="./src/Matrix.js"></script>
@@ -18,6 +20,7 @@
             let canvas = document.querySelector("#glCanvas")
             let tracer = new RayTracer(canvas)
             let fpCamera = new FirstPersonCamera(tracer)
+            let time = 0
 
             fpCamera.cameraMat = null
             let scene = [
@@ -30,7 +33,6 @@
 
             tracer.uploadScene(scene)
 
-            let time = 0
             let startTime = Date.now()
             let frameCount = 0
 

@@ -49,7 +49,7 @@ class RayTracer {
 
         self.gl.clear(self.gl.COLOR_BUFFER_BIT)
 
-        self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.vertices.length)
+        self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, 4)
     }
     
     uploadScene(scene) {
