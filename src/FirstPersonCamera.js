@@ -18,7 +18,7 @@ class FirstPersonCamera {
         
         let handleMouse = function(event) {
             document.mouseX -= event.movementX * 0.001
-            document.mouseY += event.movementY * 0.001
+            document.mouseY -= event.movementY * 0.001
 
             document.tracer.cameraMat = 
                 Matrix3x3.makeRotationMatrix(document.mouseY, document.mouseX, 0.0)
