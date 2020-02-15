@@ -19,20 +19,43 @@
         <script>            
             let canvas = document.querySelector("#glCanvas")
             let tracer = new RayTracer(canvas)
-            let fpCamera = new FirstPersonCamera(tracer)
-            let time = 0
+            tracer.cameraPos = new Vector(0.0, 0.0, -100.0)
+            let fpCamera = new FirstPersonCamera(tracer, 60.0)
 
-            fpCamera.cameraMat = null
+            let getRandomSphere = function() {
+                let radius = Math.random()*2.0 + 1.0
+                let position = new Vector((Math.random()-0.5)*20.0, (Math.random()-0.5)*10.0, (Math.random()-0.5)*20.0)
+                let color = new Vector(Math.random(), Math.random(), Math.random())
+                return new Sphere(position, radius, new Material(color))
+            }
+
             let scene = [
-                new Sphere(new Vector(0.0, 0.0, 20.0), 1.0, new Material(new Vector(1.0, 0.0, 0.0))).get(),
-                new Sphere(new Vector(20.0, 0.0, 0.0), 1.0, new Material(new Vector(0.0, 1.0, 0.0))).get(),
-                new Sphere(new Vector(-20.0, 0.0, 0.0), 1.0, new Material(new Vector(0.0, 0.0, 1.0))).get(),
-                new Sphere(new Vector(0.0, 0.0, -20.0), 1.0, new Material(new Vector(1.0, 0.0, 1.0))).get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
+                getRandomSphere().get(),
                 new Light(new Vector(0.0, 20.0, 0.0)).get()
             ]
-
+            
             tracer.uploadScene(scene)
-
+            
+            let time = 0
             let startTime = Date.now()
             let frameCount = 0
 

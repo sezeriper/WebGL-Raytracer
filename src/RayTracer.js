@@ -26,6 +26,10 @@ class RayTracer {
         this.cameraMat = new Matrix3x3
         this.gl.uniformMatrix3fv(this.uniformCameraMat, false, new Float32Array(this.cameraMat.get()))
         
+        this.uniformCameraPos = this.gl.getUniformLocation(shaderProgram, "cameraPos")
+        this.cameraPos = new Vector
+        this.gl.uniform3f(this.uniformCameraPos, this.cameraPos.x, this.cameraPos.y, this.cameraPos.z)
+
         this.vertices = new Float32Array([
             -1.0, -1.0,
             -1.0,  1.0,
@@ -40,12 +44,15 @@ class RayTracer {
         let aPosition = this.gl.getAttribLocation(shaderProgram, "aPosition")
         this.gl.vertexAttribPointer(aPosition, 2, this.gl.FLOAT, false, 0, 0)
         this.gl.enableVertexAttribArray(aPosition)
+
+        window.tracer = this
     }
     
     static draw(self) {
         self.resize()
 
         self.gl.uniformMatrix3fv(self.uniformCameraMat, false, new Float32Array(self.cameraMat.get()))
+        self.gl.uniform3f(self.uniformCameraPos, self.cameraPos.x, self.cameraPos.y, self.cameraPos.z)
 
         self.gl.clear(self.gl.COLOR_BUFFER_BIT)
 

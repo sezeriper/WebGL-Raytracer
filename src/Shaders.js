@@ -14,13 +14,15 @@ let fragmentSource =
 `#version 300 es
 
 #define INFINITY 3.4028237e38
-#define NUM_OF_SPHERES 4
+#define NUM_OF_SPHERES 20
 #define NUM_OF_LIGHTS 1
 
 precision mediump float;
 
 uniform vec2 windowSize;
 uniform mat3 cameraMat;
+uniform vec3 cameraPos;
+
 out vec4 fragColor;
 
 struct Ray {
@@ -91,13 +93,13 @@ void main() {
     vec3 fragCoord = vec3((gl_FragCoord.xy-windowSize*0.5)/windowSize.xy, 0.0);
     fragCoord.x *= windowSize.x/windowSize.y;
 
-    fragCoord.z += 5.0;
-    fragCoord = cameraMat*fragCoord;
+    fragCoord.z += 3.0;
+    fragCoord = cameraPos + (cameraMat*fragCoord);
 
     Ray ray; 
     Intersection intersections[2];
 
-    ray.origin = vec3(0.0, 0.0, 0.0);
+    ray.origin = cameraPos;
     ray.direction = normalize(fragCoord - ray.origin);
 
     getIntersection(ray, intersections[0]);

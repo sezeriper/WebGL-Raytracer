@@ -41,6 +41,6 @@ class Matrix3x3 {
     }
 
     get() {
-        return this.list;
+        return this.list
     }
 }
