@@ -29,30 +29,15 @@
                 return new Sphere(position, radius, new Material(color))
             }
 
+
+
             let scene = [
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
-                getRandomSphere().get(),
                 new Light(new Vector(0.0, 20.0, 0.0)).get()
             ]
-            
+
+            for(let i = 0; i < 20; i++)
+                scene.push(getRandomSphere().get())
+
             tracer.uploadScene(scene)
             
             let time = 0

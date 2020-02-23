@@ -13,11 +13,11 @@ void main() {
 let fragmentSource = 
 `#version 300 es
 
-#define INFINITY 3.4028237e38
+precision mediump float;
+
+#define INFINITY 3.0e38
 #define NUM_OF_SPHERES 20
 #define NUM_OF_LIGHTS 1
-
-precision mediump float;
 
 uniform vec2 windowSize;
 uniform mat3 cameraMat;
@@ -56,12 +56,13 @@ struct Sphere {
 };
 
 layout(std140) uniform Scene {
-    Sphere spheres[NUM_OF_SPHERES];
     Light lights[NUM_OF_LIGHTS];
+    Sphere spheres[NUM_OF_SPHERES];
 } scene;
 
 void getIntersection(in Ray ray, out Intersection intersection) {
     float minDistance = INFINITY;
+    intersection.isExist = false;
 
     for(int i = 0; i < NUM_OF_SPHERES; i++) {
         Sphere sphere = scene.spheres[i];
